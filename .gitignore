@@ -104,7 +104,7 @@ bit_recovered.txt
 test_kyber_local
 test_kyber_indcpa_local
 
-NTTRU/
+# NTTRU/
 best_samples_and_outers
 
 .ipynb_checkpoints/
