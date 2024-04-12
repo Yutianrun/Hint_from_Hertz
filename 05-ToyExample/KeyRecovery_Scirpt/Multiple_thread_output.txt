@@ -1,0 +1,18 @@
+Finished experiment.	Hints: 128	Blocksize: 17	Time: 4920.581572s
+Finished experiment.	Hints: 128	Blocksize: 17	Time: 5183.947020s
+Finished experiment.	Hints: 128	Blocksize: 21	Time: 6872.961317s
+Finished experiment.	Hints: 128	Blocksize: 23	Time: 8197.895006s
+Finished experiment.	Hints: 128	Blocksize: 23	Time: 8922.880375s
+Finished experiment.	Hints: 128	Blocksize: 25	Time: 9813.613810s
+Finished experiment.	Hints: 128	Blocksize: 25	Time: 9949.903279s
+Finished experiment.	Hints: 128	Blocksize: 25	Time: 10166.844429s
+
+
+Finished experiment.	Hints: 128	Blocksize: 19	Time: 7876.564858s
+Finished experiment.	Hints: 128	Blocksize: 23	Time: 11239.074235s
+Finished experiment.	Hints: 128	Blocksize: 23	Time: 11321.875725s
+Finished experiment.	Hints: 128	Blocksize: 25	Time: 11575.695295s
+Finished experiment.	Hints: 128	Blocksize: 25	Time: 12836.882903s
+Finished experiment.	Hints: 128	Blocksize: 29	Time: 14829.159627s
+Finished experiment.	Hints: 128	Blocksize: 32	Time: 21575.921220s
+Finished experiment.	Hints: 128	Blocksize: 33	Time: 22698.544792s

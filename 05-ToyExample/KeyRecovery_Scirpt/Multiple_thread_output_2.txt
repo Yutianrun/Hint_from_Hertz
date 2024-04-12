@@ -1,0 +1,582 @@
+[ 0  1 -1  0 -1  0  0 -1  0  1 -1  0  1  1  1  1  0  0 -1  0 -1 -1  0  0
+ -1  2  0  0  0 -1 -2 -1  0 -1  0 -1 -1  0  0  0  0  1  1  0 -1  2  0 -1
+ -2  1  1  2 -1  1  0 -1  0 -2  0 -2  1  2  0  0 -1 -1 -2 -1  1 -1 -1  0
+  0 -1 -1  0  1  0  0  1  0 -1  0 -1 -2  0 -2  1 -1  1  0  0 -2 -1  1 -1
+ -2  1 -1  1  2  0 -2  1 -2  0 -1  1  0 -1  1 -1 -1  0  0  2  2  2  0  0
+ -2  1  2  1  0  1  1 -2  0  0 -1  0  0  0 -1  2  0  1 -2 -1  0  0  0  0
+  1  0  1  0  1  1  2  1  0 -1  0  2 -1 -1  0 -1 -1  0  2 -1 -1  1  0  1
+  0  0 -1 -1 -2 -1  0 -1  1 -1  0  0  0  1  1 -1  1  1 -2  1  1  0  0  0
+ -1 -2  2  1  0  1 -1  2  0 -1  1  0 -1  2  0  0  0 -1  1 -1 -2  0  1  1
+  0 -1 -1  0  1  0  2  0 -1  1 -2  0 -1  1  0  1  0  0  2 -1  0  0  1  0
+  1 -1 -1 -2  1  1  0  1  2 -2  0  0  1  0  0  0]
+[-1  1  0  1 -2 -1 -1 -1 -1  0  0  0  1  0  1 -1 -1  0  0  0  0 -2  0  1
+  2  0  2  1 -1 -1  0  0  1  1  0  0  0  1  1 -1  0 -1 -2 -1  2  0 -1  0
+  1  0 -1  2 -1 -1 -1 -1 -1  0  1  0  0  0 -1  0  0 -1  0  2 -2 -2 -2  1
+ -1  2  0  1  1  2  0  1  0 -1  1  1 -1 -1  0 -1 -1 -1  0 -1  0 -1 -2 -2
+  0  1 -1  1 -1  1  0 -1  0  1  1 -1 -1  1 -2 -1  1  2 -1 -1 -1  0 -2  2
+ -1  0  0  1  0  1  1  1 -1  2  0  1  0 -1  0  1  0  1  2  0  1  2  2 -1
+  1 -1  0  0  0 -1 -1  1 -1 -1 -1  0  0  0  0 -1 -1  0  0  2  0  0 -1  0
+  0  0  1 -1  0  1 -1  0  0  0 -1 -1  1  1  1  1 -1 -1 -2  0  1  1  0  1
+  1  0  0 -1  0  1 -1  0 -1  0  1 -1  0 -1  0  1  1  1  1 -1  0  0 -1  2
+  1  0 -2  0 -2  1  0  1  0  0  1  0  1 -2  0  1  0  0  0  0 -1  1 -1  0
+ -1  0  0  1  0  1 -1  0 -1  0  0  1  0  2  0  1]
+[ 1  1 -1  1  1 -1  0  1 -1  1  0  0 -2  2  0 -1  0  1  0 -1  0 -1  0 -1
+  0  0 -1 -1  0  1  0  0 -1  1  0 -1  1  2 -2  2  0  0  0 -2  1  0  2 -1
+ -1  1  1  1  1  0  0  0 -1  0  1  0  1  1 -1  0  0  1  0  1  2  1  0  0
+  0  0  0  0  1  0 -1 -1  0  0  0  2  1  0  0  0  0  0 -1  0  1 -1  1  2
+ -1  0 -1  1  1  2  0  0  1  1  0  0  1 -2  1  0  1 -1  0  0  2  0  1  0
+  0  1  0  0  2 -1  1 -2  0 -1  0 -1  2 -1 -1  1  1  0  0  0  0 -1  1  0
+ -1 -1  0  2  0  0 -2  1  0 -1  1  1 -1  0 -1  1  1 -1  0 -1  0  0  0  1
+ -1  1 -1  0  1  1 -1  1  1  1 -1  0 -2  0  0  0  0  1 -2  0  0  0 -1  0
+  0 -1 -1 -1 -2  2  0  0  0  0  2 -2  1  0  1  0  0 -1 -1  1 -1 -2  0  0
+  0  0  2  1  1  2  1 -1  2 -1  1  0  1  0 -1 -2  0  1  1 -1 -1 -2  0  0
+ -1 -1  0  1  1  0  0 -2 -2 -2  0  1  1 -1 -1  0]
+[ 0  0  1  0  1  0  0 -1 -1  0  0 -1  1  0  0  0 -1  1  0  1  0  1 -1  0
+  0  0  1 -2 -1  1 -1  0 -1  0 -1  0  0  1  0  0 -2  0  1  1  2 -1  1  0
+  1 -1 -1  0 -2  1 -2 -1  0 -1  1  1  0  0 -1  0  0  2  1  2 -2  2  1  1
+  0 -1 -1  1  0  0 -2  0  1  1  1 -1  0  0  1  0  0  0  0 -1  0  0 -2 -2
+ -1  1 -1 -1 -1  1  0  0  1  0 -1  0  1 -1  1 -2  0  0 -1  0 -1  0  0 -1
+  0 -2  0  0 -2 -1  0 -1  1  1  0  1 -1 -1  0  0  0  0 -1  1 -1  0 -2 -1
+  1 -1  0 -2 -1  0 -1  1  1  1 -2 -1 -1 -1  2 -1 -1  0 -1  0 -1  0  1  2
+ -1  2  0  0  1  1  1 -1  1  0  1  0  0 -1 -1  0 -1 -1 -1  0  0  0  2  0
+ -2  1  0  0  1  0  0  0 -2  0 -1  0  0 -1  2  1  1 -1 -1  1 -1 -1  0 -1
+ -1  1  0  0  0 -2  0  0  0  0 -1  1 -1  1  0  0 -1 -1 -1  0  0 -1  1 -2
+ -1  1  1  0 -1 -1  1 -1 -1  1 -1  0  0  1  0  1]
+[ 1  0 -1  0  1  0 -1 -1 -1  1  0  0  1  0  0 -1  0  1  0  0  0  0  2  0
+  0  0 -1  0  0 -1  0  0  0  0  1  0 -2  0  0  0 -1  0  1 -1  1  0 -2  1
+ -1  0 -1  1  0 -1  0 -1  1 -1 -1 -1  1  1 -1  0  0 -2 -2 -1  2  2 -1  1
+  0 -2  1 -1 -1  0 -1  0 -1 -1  1 -1  0  1 -1  1  0  1  0 -1  1 -1  0  0
+  0  1  1  1  1  0  0  1 -1  1  0  1 -2  1 -2  0  1  0  1  1 -1  0 -1  0
+  1  0 -1 -2 -1 -1  1  1  0 -1 -1  0  1  0 -1 -1  0 -1 -2  1  1  1  0  1
+ -1 -1  0  0  1 -2  1 -2  1 -1 -1  1  1  0 -1 -2  0 -1 -1  0  0 -1  0  1
+ -1  0 -1 -2  0  0  1  1  0  1  1  0  0  0  1  0  1  0  0  0  0  0 -1 -1
+ -2  0 -1  0  1 -1  0  1 -1  1 -1 -1  1  1  0 -1  0  0  1  0 -1  0  1  0
+ -1  1  0 -1  1  0  0  0  1  0 -1  1  0  2  0  1  2 -1  0 -1  0  0  2  2
+  1  0 -2  1  0 -1  0  0 -2 -1  1  0  0 -1  1 -1]
+[ 0 -1  0  1  1  0  1  0 -1  1 -1  2  0  1  1  0  1 -1 -2  0  0 -1 -1 -1
+ -2  0  0  1  0 -1  0  0  0  0 -1  0 -1  0  2 -1  2  1  2  2  0 -1  0 -2
+  1  0  2  1 -1 -2  1  1  0  2  0  2  1  0  0 -1  1 -1  0 -1  0 -2  2  2
+  1 -1 -1  0  0  1  2  1 -1 -1 -1  1 -1  0 -1  0  0  0  2  0  1  1  1  1
+  0  0  0  1  0  0 -1 -1 -1  0  0  2 -1  0 -2  2  0 -1  2 -2  0  1  0 -1
+ -1 -1 -1  0  1  0  1  0  1  1  1  0  0  0 -1 -1  0  0  1 -1  0 -1 -1 -1
+ -1 -1  0  1 -1 -1  0  0  1  2  1 -1 -2  0  1  1  0  1 -1  1  0  0  1  1
+ -1  1 -1  0  1 -1  2  0  0  0  0  0  1  1  1  1  1  0 -1 -1 -2 -1  0  0
+  0  0 -1  0  0  1  2  0  1  0  0  0 -1  0  1  1 -2  0 -1  0  0  1 -1  1
+ -1 -1  0  0 -1 -2  0  1  1  1  1 -1  0  1  1  0  0  1  0 -1  0 -1  0 -1
+  1 -2 -1 -1  0  1  1 -2  2  1 -1  1  1  0 -1  0]
+[ 0  1  1 -1  0  1  1  1  0 -1  1  0 -2  2  1  1 -1  0  1  1  1  0  1  1
+ -1  1  1  0  0  0  1  1  0  0 -1  1 -1  0  1  0  1  1 -1 -1  1 -1 -1  0
+ -1  0 -1  1 -1  0  0  0 -1  0 -1 -1  1  1  0  0  0 -1  0  0 -1  2 -1  1
+  1 -1  0  1  0  0  0  1  1  0  0 -1  0 -1 -1  0  1 -1  0 -2  1  1  2 -1
+  0  1 -1  1  0  0 -1  0 -1  0  1  1  0  1  0  0  1  1  1  0  0  1  1 -1
+ -1  0  1 -1  1 -1  0  0 -1 -2 -2 -1 -1 -1 -1  0  1  0  1  2  0 -1  0  1
+  0  1 -1  0  0 -2 -1  0  0  0  1  1  0 -1  0 -2 -1  0  0  1  0  0 -1  0
+ -1 -1 -2  0  0 -1 -1  1 -1  2 -1  0  0 -1  0  0 -1  1  2  0 -1  0 -1  0
+  0  0  0 -1  0 -1  0 -1  1  0 -1  1  0  0  0  0  1  2  1 -1  1 -1 -1  1
+  2  1  0  0 -1 -1  0  0  1 -1 -1  0  0 -1  1  1 -1  1  0 -1  0  0  0  1
+  1  1  1  0  2 -1  0 -2  0  0  0  1  1  1 -2  0]
+[ 2  1 -1  0  0 -1 -1  0 -1 -2 -1  0  1 -1 -1  1 -2  0 -1  0 -2  2  1  0
+  0  0 -1  1  1  0  0  1 -2  1 -1  0  2  0  0  1 -1  1  1  1 -1 -2  0  0
+  0  1  0  0  0 -1  1 -1  0  0 -1  0  0  1  1  1 -1 -1 -1  0  0  2  1  2
+ -1  1  1 -1 -1  0 -1  0 -1  0  1  0  0  0  0  0  0  0 -1 -1  0  1  1 -1
+  1  1  2  2  1  1  1  0  0 -1  0  1  0  1  1  0  0  1  1 -1  1  0  0 -1
+  0 -1  1  0  2  0  1  0  2 -1  1 -1  1 -1  0  0 -1  1  0  0  0  0  1 -1
+  0  1  1  1  1  0  0  0  0 -1  0  0  0  0 -1 -2  1 -1  0  0 -1  1  2  0
+  0 -1 -1  2  1 -1 -1 -1  2  0 -1 -1  0 -1  0  0  0 -1  0  0  0  1  0 -1
+  0  1  1  1  1  0  0 -1  0  1  0  1 -1  1  0  2  1 -1 -1  1  1  0 -1  1
+  0 -1  1 -1  1 -1  1  1  0  1  1  1 -1  1 -1  0 -1  1 -1 -1 -1 -1  0  2
+  0  0  0  0 -1  0  1 -1  2  2  1  1  0  0 -1  0]
+Constructing basis.
+Only mod-q hints have been integrated. Going to smaller LWE dimension.
+Constructing basis.
+Only mod-q hints have been integrated. Going to smaller LWE dimension.
+Constructing basis.
+Only mod-q hints have been integrated. Going to smaller LWE dimension.
+Constructing basis.
+Only mod-q hints have been integrated. Going to smaller LWE dimension.
+Finished basis construction. Time: 0.421014s.
+Constructing sublattice.
+Finished sublattice construction. Time: 0.000004s.
+Finished basis construction. Time: 0.437423s.
+Constructing sublattice.
+Finished sublattice construction. Time: 0.000004s.
+Finished basis construction. Time: 0.458612s.
+Constructing sublattice.
+Finished sublattice construction. Time: 0.000005s.
+Finished basis construction. Time: 0.525494s.
+Constructing sublattice.
+Finished sublattice construction. Time: 0.000005s.
+Constructing basis.
+
+Only mod-q hints have been integrated. Going to smaller LWE dimension.Starting LLL.Starting LLL.
+
+Constructing basis.
+Only mod-q hints have been integrated. Going to smaller LWE dimension.
+Starting LLL.
+Starting LLL.
+Constructing basis.
+Only mod-q hints have been integrated. Going to smaller LWE dimension.
+Constructing basis.
+Only mod-q hints have been integrated. Going to smaller LWE dimension.
+Finished basis construction. Time: 0.527201s.
+Constructing sublattice.
+Finished sublattice construction. Time: 0.000005s.
+Finished basis construction. Time: 0.529814s.
+Constructing sublattice.
+Finished sublattice construction. Time: 0.000005s.
+Finished basis construction. Time: 0.543765s.
+Constructing sublattice.
+Finished sublattice construction. Time: 0.000007s.
+Finished basis construction. Time: 0.532349s.
+Constructing sublattice.
+Finished sublattice construction. Time: 0.000005s.
+Starting LLL.
+Starting LLL.
+Starting LLL.
+Starting LLL.
+Finished LLL. Time: 221.057172s.
+Starting BKZ with blocksize 2.
+Finished LLL. Time: 230.886888s.
+Starting BKZ with blocksize 2.
+Finished BKZ with blocksize 2. Time: 12.403501s.
+Starting BKZ with blocksize 3.
+Finished LLL. Time: 241.209552s.
+Starting BKZ with blocksize 2.
+Finished BKZ with blocksize 2. Time: 10.584205s.
+Starting BKZ with blocksize 3.
+Finished LLL. Time: 243.602494s.
+Starting BKZ with blocksize 2.
+Finished LLL. Time: 245.695476s.
+Starting BKZ with blocksize 2.
+Finished LLL. Time: 249.959446s.
+Starting BKZ with blocksize 2.
+Finished BKZ with blocksize 2. Time: 10.649618s.
+Starting BKZ with blocksize 3.
+Finished LLL. Time: 250.754767s.
+Starting BKZ with blocksize 2.
+Finished BKZ with blocksize 2. Time: 10.587093s.
+Starting BKZ with blocksize 3.
+Finished LLL. Time: 255.176842s.
+Starting BKZ with blocksize 2.
+Finished BKZ with blocksize 2. Time: 11.139570s.
+Starting BKZ with blocksize 3.
+Finished BKZ with blocksize 2. Time: 10.962535s.
+Starting BKZ with blocksize 3.
+Finished BKZ with blocksize 2. Time: 11.147434s.
+Starting BKZ with blocksize 3.
+Finished BKZ with blocksize 2. Time: 10.964036s.
+Starting BKZ with blocksize 3.
+Finished BKZ with blocksize 3. Time: 309.306365s.
+Starting BKZ with blocksize 4.
+Finished BKZ with blocksize 4. Time: 11.288055s.
+Starting BKZ with blocksize 5.
+Finished BKZ with blocksize 3. Time: 363.874258s.
+Starting BKZ with blocksize 4.
+Finished BKZ with blocksize 3. Time: 370.912736s.
+Starting BKZ with blocksize 4.
+Finished BKZ with blocksize 4. Time: 11.597927s.
+Starting BKZ with blocksize 5.
+Finished BKZ with blocksize 4. Time: 11.492941s.
+Starting BKZ with blocksize 5.
+Finished BKZ with blocksize 3. Time: 399.528865s.
+Starting BKZ with blocksize 4.
+Finished BKZ with blocksize 3. Time: 380.497212s.
+Starting BKZ with blocksize 4.
+Finished BKZ with blocksize 3. Time: 376.220978s.
+Starting BKZ with blocksize 4.
+Finished BKZ with blocksize 3. Time: 411.103462s.
+Starting BKZ with blocksize 4.
+Finished BKZ with blocksize 3. Time: 386.883064s.
+Starting BKZ with blocksize 4.
+Finished BKZ with blocksize 4. Time: 11.890875s.
+Starting BKZ with blocksize 5.
+Finished BKZ with blocksize 4. Time: 12.010410s.
+Starting BKZ with blocksize 5.
+Finished BKZ with blocksize 4. Time: 12.088630s.
+Starting BKZ with blocksize 5.
+Finished BKZ with blocksize 4. Time: 11.950659s.
+Starting BKZ with blocksize 5.
+Finished BKZ with blocksize 4. Time: 12.308175s.
+Starting BKZ with blocksize 5.
+Finished BKZ with blocksize 5. Time: 420.802172s.
+Starting BKZ with blocksize 6.
+Finished BKZ with blocksize 6. Time: 14.906306s.
+Starting BKZ with blocksize 7.
+Finished BKZ with blocksize 5. Time: 414.078085s.
+Starting BKZ with blocksize 6.
+Finished BKZ with blocksize 6. Time: 15.677608s.
+Starting BKZ with blocksize 7.
+Finished BKZ with blocksize 5. Time: 431.585369s.
+Starting BKZ with blocksize 6.
+Finished BKZ with blocksize 5. Time: 422.012722s.
+Starting BKZ with blocksize 6.
+Finished BKZ with blocksize 5. Time: 428.877418s.
+Starting BKZ with blocksize 6.
+Finished BKZ with blocksize 5. Time: 425.952072s.
+Starting BKZ with blocksize 6.
+Finished BKZ with blocksize 6. Time: 15.586597s.
+Starting BKZ with blocksize 7.
+Finished BKZ with blocksize 5. Time: 428.663285s.
+Starting BKZ with blocksize 6.
+Finished BKZ with blocksize 6. Time: 15.500620s.
+Starting BKZ with blocksize 7.
+Finished BKZ with blocksize 5. Time: 432.515396s.
+Starting BKZ with blocksize 6.
+Finished BKZ with blocksize 6. Time: 15.870933s.
+Starting BKZ with blocksize 7.
+Finished BKZ with blocksize 6. Time: 15.786607s.
+Starting BKZ with blocksize 7.
+Finished BKZ with blocksize 6. Time: 15.665977s.
+Starting BKZ with blocksize 7.
+Finished BKZ with blocksize 6. Time: 15.420791s.
+Starting BKZ with blocksize 7.
+Finished BKZ with blocksize 7. Time: 601.909304s.
+Starting BKZ with blocksize 8.
+Finished BKZ with blocksize 8. Time: 15.634000s.
+Starting BKZ with blocksize 9.
+Finished BKZ with blocksize 7. Time: 599.550747s.
+Starting BKZ with blocksize 8.
+Finished BKZ with blocksize 7. Time: 586.848669s.
+Starting BKZ with blocksize 8.
+Finished BKZ with blocksize 8. Time: 15.608257s.
+Starting BKZ with blocksize 9.
+Finished BKZ with blocksize 8. Time: 15.522741s.
+Starting BKZ with blocksize 9.
+Finished BKZ with blocksize 7. Time: 588.890680s.
+Starting BKZ with blocksize 8.
+Finished BKZ with blocksize 7. Time: 580.483704s.
+Starting BKZ with blocksize 8.
+Finished BKZ with blocksize 7. Time: 601.803511s.
+Starting BKZ with blocksize 8.
+Finished BKZ with blocksize 7. Time: 603.935978s.
+Starting BKZ with blocksize 8.
+Finished BKZ with blocksize 8. Time: 15.543883s.
+Starting BKZ with blocksize 9.
+Finished BKZ with blocksize 8. Time: 15.471912s.
+Starting BKZ with blocksize 9.
+Finished BKZ with blocksize 8. Time: 15.390532s.
+Starting BKZ with blocksize 9.
+Finished BKZ with blocksize 7. Time: 611.974416s.
+Starting BKZ with blocksize 8.
+Finished BKZ with blocksize 8. Time: 15.532265s.
+Starting BKZ with blocksize 9.
+Finished BKZ with blocksize 8. Time: 16.070374s.
+Starting BKZ with blocksize 9.
+Finished BKZ with blocksize 9. Time: 724.445107s.
+Starting BKZ with blocksize 10.
+Finished BKZ with blocksize 10. Time: 16.431598s.
+Starting BKZ with blocksize 11.
+Finished BKZ with blocksize 9. Time: 722.539848s.
+Starting BKZ with blocksize 10.
+Finished BKZ with blocksize 9. Time: 721.624797s.
+Starting BKZ with blocksize 10.
+Finished BKZ with blocksize 10. Time: 16.493014s.
+Starting BKZ with blocksize 11.
+Finished BKZ with blocksize 10. Time: 17.057735s.
+Starting BKZ with blocksize 11.
+Finished BKZ with blocksize 9. Time: 717.265056s.
+Starting BKZ with blocksize 10.
+Finished BKZ with blocksize 9. Time: 721.984151s.
+Starting BKZ with blocksize 10.
+Finished BKZ with blocksize 10. Time: 16.952570s.
+Starting BKZ with blocksize 11.
+Finished BKZ with blocksize 9. Time: 742.678267s.
+Starting BKZ with blocksize 10.
+Finished BKZ with blocksize 9. Time: 742.684603s.
+Starting BKZ with blocksize 10.
+Finished BKZ with blocksize 9. Time: 722.795046s.
+Starting BKZ with blocksize 10.
+Finished BKZ with blocksize 10. Time: 17.237190s.
+Starting BKZ with blocksize 11.
+Finished BKZ with blocksize 10. Time: 16.845148s.
+Starting BKZ with blocksize 11.
+Finished BKZ with blocksize 10. Time: 16.860520s.
+Starting BKZ with blocksize 11.
+Finished BKZ with blocksize 10. Time: 16.793211s.
+Starting BKZ with blocksize 11.
+Finished BKZ with blocksize 11. Time: 796.360751s.
+Starting BKZ with blocksize 12.
+Finished BKZ with blocksize 12. Time: 20.692152s.
+Starting BKZ with blocksize 13.
+Finished BKZ with blocksize 11. Time: 812.009320s.
+Starting BKZ with blocksize 12.
+Finished BKZ with blocksize 11. Time: 779.908310s.
+Starting BKZ with blocksize 12.
+Finished BKZ with blocksize 11. Time: 763.112960s.
+Starting BKZ with blocksize 12.
+Finished BKZ with blocksize 12. Time: 17.940429s.
+Starting BKZ with blocksize 13.
+Finished BKZ with blocksize 11. Time: 818.578471s.
+Starting BKZ with blocksize 12.
+Finished BKZ with blocksize 11. Time: 778.222013s.
+Starting BKZ with blocksize 12.
+Finished BKZ with blocksize 11. Time: 789.820066s.
+Starting BKZ with blocksize 12.
+Finished BKZ with blocksize 12. Time: 22.366551s.
+Starting BKZ with blocksize 13.
+Finished BKZ with blocksize 11. Time: 787.616378s.
+Starting BKZ with blocksize 12.
+Finished BKZ with blocksize 12. Time: 20.746032s.
+Starting BKZ with blocksize 13.
+Finished BKZ with blocksize 12. Time: 19.664751s.
+Starting BKZ with blocksize 13.
+Finished BKZ with blocksize 12. Time: 20.174804s.
+Starting BKZ with blocksize 13.
+Finished BKZ with blocksize 12. Time: 25.380972s.
+Starting BKZ with blocksize 13.
+Finished BKZ with blocksize 12. Time: 19.439008s.
+Starting BKZ with blocksize 13.
+Finished BKZ with blocksize 13. Time: 911.725811s.
+Starting BKZ with blocksize 14.
+Finished BKZ with blocksize 14. Time: 19.558069s.
+Starting BKZ with blocksize 15.
+Finished BKZ with blocksize 13. Time: 917.812387s.
+Starting BKZ with blocksize 14.
+Finished BKZ with blocksize 13. Time: 925.082495s.
+Starting BKZ with blocksize 14.
+Finished BKZ with blocksize 13. Time: 922.420689s.
+Starting BKZ with blocksize 14.
+Finished BKZ with blocksize 14. Time: 20.151258s.
+Starting BKZ with blocksize 15.
+Finished BKZ with blocksize 13. Time: 924.687795s.
+Starting BKZ with blocksize 14.
+Finished BKZ with blocksize 13. Time: 919.736661s.
+Starting BKZ with blocksize 14.
+Finished BKZ with blocksize 13. Time: 929.045905s.
+Starting BKZ with blocksize 14.
+Finished BKZ with blocksize 14. Time: 23.602444s.
+Finished BKZ with blocksize 14. Time: 21.352615s.Starting BKZ with blocksize 15.
+
+Starting BKZ with blocksize 15.
+Finished BKZ with blocksize 14. Time: 27.593518s.
+Starting BKZ with blocksize 15.
+Finished BKZ with blocksize 14. Time: 23.445338s.
+Starting BKZ with blocksize 15.
+Finished BKZ with blocksize 14. Time: 32.824186s.
+Starting BKZ with blocksize 15.
+Finished BKZ with blocksize 13. Time: 957.747413s.
+Starting BKZ with blocksize 14.
+Finished BKZ with blocksize 14. Time: 18.336207s.
+Starting BKZ with blocksize 15.
+Finished BKZ with blocksize 15. Time: 996.715092s.
+Starting BKZ with blocksize 16.
+Finished BKZ with blocksize 16. Time: 32.730653s.
+Starting BKZ with blocksize 17.
+Finished BKZ with blocksize 15. Time: 1010.915670s.
+Starting BKZ with blocksize 16.
+Finished BKZ with blocksize 16. Time: 26.083830s.
+Starting BKZ with blocksize 17.
+Finished BKZ with blocksize 15. Time: 1025.504857s.
+Starting BKZ with blocksize 16.
+Finished BKZ with blocksize 15. Time: 1024.886736s.
+Starting BKZ with blocksize 16.
+Finished BKZ with blocksize 15. Time: 1051.894475s.
+Starting BKZ with blocksize 16.
+Finished BKZ with blocksize 15. Time: 1060.213152s.
+Starting BKZ with blocksize 16.
+Finished BKZ with blocksize 15. Time: 1018.907956s.
+Starting BKZ with blocksize 16.
+Finished BKZ with blocksize 16. Time: 30.006712s.
+Starting BKZ with blocksize 17.
+Finished BKZ with blocksize 16. Time: 23.877052s.
+Starting BKZ with blocksize 17.
+Finished BKZ with blocksize 16. Time: 24.668773s.
+Starting BKZ with blocksize 17.
+Finished BKZ with blocksize 16. Time: 19.275691s.
+Starting BKZ with blocksize 17.
+Finished BKZ with blocksize 16. Time: 24.800543s.
+Starting BKZ with blocksize 17.
+Finished BKZ with blocksize 15. Time: 1071.736380s.
+Starting BKZ with blocksize 16.
+Finished BKZ with blocksize 16. Time: 21.276347s.
+Starting BKZ with blocksize 17.
+Finished BKZ with blocksize 17. Time: 1150.095212s.
+Starting BKZ with blocksize 18.
+Finished BKZ with blocksize 18. Time: 37.833859s.
+Starting BKZ with blocksize 19.
+Finished BKZ with blocksize 17. Time: 1166.568775s.
+Starting BKZ with blocksize 18.
+Finished BKZ with blocksize 18. Time: 42.877293s.
+Starting BKZ with blocksize 19.
+Finished BKZ with blocksize 17. Time: 1156.193293s.
+Starting BKZ with blocksize 18.
+Finished BKZ with blocksize 17. Time: 1139.855280s.
+Starting BKZ with blocksize 18.
+Finished BKZ with blocksize 17. Time: 1157.744844s.
+Starting BKZ with blocksize 18.
+Finished BKZ with blocksize 17. Time: 1170.785353s.
+Starting BKZ with blocksize 18.
+Finished BKZ with blocksize 17. Time: 1177.233774s.
+Starting BKZ with blocksize 18.
+Finished BKZ with blocksize 18. Time: 31.060682s.
+Starting BKZ with blocksize 19.
+Finished BKZ with blocksize 18. Time: 45.061669s.
+Starting BKZ with blocksize 19.
+Finished BKZ with blocksize 17. Time: 1176.239107s.
+Starting BKZ with blocksize 18.
+Finished BKZ with blocksize 18. Time: 44.453179s.
+Starting BKZ with blocksize 19.
+Finished BKZ with blocksize 18. Time: 65.371013s.
+Starting BKZ with blocksize 19.
+Finished BKZ with blocksize 18. Time: 51.469545s.
+Starting BKZ with blocksize 19.
+Finished BKZ with blocksize 18. Time: 34.587340s.
+Starting BKZ with blocksize 19.
+Finished BKZ with blocksize 19. Time: 1464.458124s.
+Starting BKZ with blocksize 20.
+Finished BKZ with blocksize 20. Time: 32.459713s.
+Starting BKZ with blocksize 21.
+Finished BKZ with blocksize 19. Time: 1392.098128s.
+Starting BKZ with blocksize 20.
+Found secret at blocksize 19.
+Finished BKZ with blocksize 19. Time: 1445.539724s.
+Finished experiment.	Hints: 128	Blocksize: 19	Time: 7876.564858s
+[-1  1  0  1 -2 -1 -1 -1 -1  0  0  0  1  0  1 -1 -1  0  0  0  0 -2  0  1
+  2  0  2  1 -1 -1  0  0  1  1  0  0  0  1  1 -1  0 -1 -2 -1  2  0 -1  0
+  1  0 -1  2 -1 -1 -1 -1 -1  0  1  0  0  0 -1  0  0 -1  0  2 -2 -2 -2  1
+ -1  2  0  1  1  2  0  1  0 -1  1  1 -1 -1  0 -1 -1 -1  0 -1  0 -1 -2 -2
+  0  1 -1  1 -1  1  0 -1  0  1  1 -1 -1  1 -2 -1  1  2 -1 -1 -1  0 -2  2
+ -1  0  0  1  0  1  1  1 -1  2  0  1  0 -1  0  1  0  1  2  0  1  2  2 -1
+  1 -1  0  0  0 -1 -1  1 -1 -1 -1  0  0  0  0 -1 -1  0  0  2  0  0 -1  0
+  0  0  1 -1  0  1 -1  0  0  0 -1 -1  1  1  1  1 -1 -1 -2  0  1  1  0  1
+  1  0  0 -1  0  1 -1  0 -1  0  1 -1  0 -1  0  1  1  1  1 -1  0  0 -1  2
+  1  0 -2  0 -2  1  0  1  0  0  1  0  1 -2  0  1  0  0  0  0 -1  1 -1  0
+ -1  0  0  1  0  1 -1  0 -1  0  0  1  0  2  0  1]
+Finished BKZ with blocksize 19. Time: 1417.399188s.
+Starting BKZ with blocksize 20.
+Finished BKZ with blocksize 20. Time: 44.077394s.
+Starting BKZ with blocksize 21.
+Finished BKZ with blocksize 19. Time: 1403.116769s.
+Starting BKZ with blocksize 20.
+Finished BKZ with blocksize 19. Time: 1410.179714s.
+Starting BKZ with blocksize 20.
+Finished BKZ with blocksize 19. Time: 1415.978427s.
+Starting BKZ with blocksize 20.
+Finished BKZ with blocksize 20. Time: 31.150932s.
+Starting BKZ with blocksize 21.
+Finished BKZ with blocksize 20. Time: 28.046963s.
+Starting BKZ with blocksize 21.
+Finished BKZ with blocksize 20. Time: 48.140392s.
+Starting BKZ with blocksize 21.
+Finished BKZ with blocksize 19. Time: 1422.207679s.
+Starting BKZ with blocksize 20.
+Finished BKZ with blocksize 20. Time: 55.323487s.
+Starting BKZ with blocksize 21.
+Finished BKZ with blocksize 20. Time: 65.189890s.
+Starting BKZ with blocksize 21.
+Finished BKZ with blocksize 21. Time: 1315.001780s.
+Starting BKZ with blocksize 22.
+Finished BKZ with blocksize 21. Time: 1302.600708s.
+Starting BKZ with blocksize 22.
+Finished BKZ with blocksize 21. Time: 1268.661193s.
+Starting BKZ with blocksize 22.
+Finished BKZ with blocksize 21. Time: 1317.254290s.
+Starting BKZ with blocksize 22.
+Finished BKZ with blocksize 21. Time: 1298.212697s.
+Starting BKZ with blocksize 22.
+Finished BKZ with blocksize 21. Time: 1317.152783s.
+Starting BKZ with blocksize 22.
+Finished BKZ with blocksize 21. Time: 1279.059565s.
+Starting BKZ with blocksize 22.
+Finished BKZ with blocksize 22. Time: 536.499340s.
+Starting BKZ with blocksize 23.
+Finished BKZ with blocksize 22. Time: 678.068585s.
+Starting BKZ with blocksize 23.
+Finished BKZ with blocksize 22. Time: 648.616803s.
+Starting BKZ with blocksize 23.
+Finished BKZ with blocksize 22. Time: 623.804148s.
+Starting BKZ with blocksize 23.
+Finished BKZ with blocksize 22. Time: 727.487635s.
+Starting BKZ with blocksize 23.
+Finished BKZ with blocksize 22. Time: 708.116040s.
+Starting BKZ with blocksize 23.
+Finished BKZ with blocksize 22. Time: 800.867471s.
+Starting BKZ with blocksize 23.
+Finished BKZ with blocksize 23. Time: 1298.676795s.
+Starting BKZ with blocksize 24.
+Finished BKZ with blocksize 24. Time: 36.419065s.
+Starting BKZ with blocksize 25.
+Finished BKZ with blocksize 23. Time: 1299.010301s.
+Starting BKZ with blocksize 24.
+Found secret at blocksize 23.
+Finished BKZ with blocksize 23. Time: 1405.574743s.
+Finished experiment.	Hints: 128	Blocksize: 23	Time: 11239.074235s
+[ 0  1  1 -1  0  1  1  1  0 -1  1  0 -2  2  1  1 -1  0  1  1  1  0  1  1
+ -1  1  1  0  0  0  1  1  0  0 -1  1 -1  0  1  0  1  1 -1 -1  1 -1 -1  0
+ -1  0 -1  1 -1  0  0  0 -1  0 -1 -1  1  1  0  0  0 -1  0  0 -1  2 -1  1
+  1 -1  0  1  0  0  0  1  1  0  0 -1  0 -1 -1  0  1 -1  0 -2  1  1  2 -1
+  0  1 -1  1  0  0 -1  0 -1  0  1  1  0  1  0  0  1  1  1  0  0  1  1 -1
+ -1  0  1 -1  1 -1  0  0 -1 -2 -2 -1 -1 -1 -1  0  1  0  1  2  0 -1  0  1
+  0  1 -1  0  0 -2 -1  0  0  0  1  1  0 -1  0 -2 -1  0  0  1  0  0 -1  0
+ -1 -1 -2  0  0 -1 -1  1 -1  2 -1  0  0 -1  0  0 -1  1  2  0 -1  0 -1  0
+  0  0  0 -1  0 -1  0 -1  1  0 -1  1  0  0  0  0  1  2  1 -1  1 -1 -1  1
+  2  1  0  0 -1 -1  0  0  1 -1 -1  0  0 -1  1  1 -1  1  0 -1  0  0  0  1
+  1  1  1  0  2 -1  0 -2  0  0  0  1  1  1 -2  0]
+Finished BKZ with blocksize 24. Time: 47.661776s.
+Starting BKZ with blocksize 25.
+Finished BKZ with blocksize 23. Time: 1376.153513s.
+Starting BKZ with blocksize 24.
+Found secret at blocksize 23.
+Finished BKZ with blocksize 23. Time: 1390.195539s.
+Finished experiment.	Hints: 128	Blocksize: 23	Time: 11321.875725s
+[ 0  0  1  0  1  0  0 -1 -1  0  0 -1  1  0  0  0 -1  1  0  1  0  1 -1  0
+  0  0  1 -2 -1  1 -1  0 -1  0 -1  0  0  1  0  0 -2  0  1  1  2 -1  1  0
+  1 -1 -1  0 -2  1 -2 -1  0 -1  1  1  0  0 -1  0  0  2  1  2 -2  2  1  1
+  0 -1 -1  1  0  0 -2  0  1  1  1 -1  0  0  1  0  0  0  0 -1  0  0 -2 -2
+ -1  1 -1 -1 -1  1  0  0  1  0 -1  0  1 -1  1 -2  0  0 -1  0 -1  0  0 -1
+  0 -2  0  0 -2 -1  0 -1  1  1  0  1 -1 -1  0  0  0  0 -1  1 -1  0 -2 -1
+  1 -1  0 -2 -1  0 -1  1  1  1 -2 -1 -1 -1  2 -1 -1  0 -1  0 -1  0  1  2
+ -1  2  0  0  1  1  1 -1  1  0  1  0  0 -1 -1  0 -1 -1 -1  0  0  0  2  0
+ -2  1  0  0  1  0  0  0 -2  0 -1  0  0 -1  2  1  1 -1 -1  1 -1 -1  0 -1
+ -1  1  0  0  0 -2  0  0  0  0 -1  1 -1  1  0  0 -1 -1 -1  0  0 -1  1 -2
+ -1  1  1  0 -1 -1  1 -1 -1  1 -1  0  0  1  0  1]
+Finished BKZ with blocksize 24. Time: 31.049959s.
+Starting BKZ with blocksize 25.
+Finished BKZ with blocksize 23. Time: 1360.823101s.
+Starting BKZ with blocksize 24.
+Finished BKZ with blocksize 24. Time: 39.428892s.
+Starting BKZ with blocksize 25.
+Finished BKZ with blocksize 23. Time: 1364.121782s.
+Starting BKZ with blocksize 24.
+Finished BKZ with blocksize 24. Time: 25.922880s.
+Starting BKZ with blocksize 25.
+Found secret at blocksize 25.
+Finished BKZ with blocksize 25. Time: 207.758698s.
+Finished experiment.	Hints: 128	Blocksize: 25	Time: 11575.695295s
+[ 0 -1  0  1  1  0  1  0 -1  1 -1  2  0  1  1  0  1 -1 -2  0  0 -1 -1 -1
+ -2  0  0  1  0 -1  0  0  0  0 -1  0 -1  0  2 -1  2  1  2  2  0 -1  0 -2
+  1  0  2  1 -1 -2  1  1  0  2  0  2  1  0  0 -1  1 -1  0 -1  0 -2  2  2
+  1 -1 -1  0  0  1  2  1 -1 -1 -1  1 -1  0 -1  0  0  0  2  0  1  1  1  1
+  0  0  0  1  0  0 -1 -1 -1  0  0  2 -1  0 -2  2  0 -1  2 -2  0  1  0 -1
+ -1 -1 -1  0  1  0  1  0  1  1  1  0  0  0 -1 -1  0  0  1 -1  0 -1 -1 -1
+ -1 -1  0  1 -1 -1  0  0  1  2  1 -1 -2  0  1  1  0  1 -1  1  0  0  1  1
+ -1  1 -1  0  1 -1  2  0  0  0  0  0  1  1  1  1  1  0 -1 -1 -2 -1  0  0
+  0  0 -1  0  0  1  2  0  1  0  0  0 -1  0  1  1 -2  0 -1  0  0  1 -1  1
+ -1 -1  0  0 -1 -2  0  1  1  1  1 -1  0  1  1  0  0  1  0 -1  0 -1  0 -1
+  1 -2 -1 -1  0  1  1 -2  2  1 -1  1  1  0 -1  0]
+Finished BKZ with blocksize 25. Time: 1524.823999s.
+Starting BKZ with blocksize 26.
+Finished BKZ with blocksize 26. Time: 22.967488s.
+Starting BKZ with blocksize 27.
+Finished BKZ with blocksize 25. Time: 1496.021556s.
+Starting BKZ with blocksize 26.
+Finished BKZ with blocksize 26. Time: 29.766279s.
+Starting BKZ with blocksize 27.
+Found secret at blocksize 25.
+Finished BKZ with blocksize 25. Time: 1510.910123s.
+Finished experiment.	Hints: 128	Blocksize: 25	Time: 12836.882903s
+[ 1  1 -1  1  1 -1  0  1 -1  1  0  0 -2  2  0 -1  0  1  0 -1  0 -1  0 -1
+  0  0 -1 -1  0  1  0  0 -1  1  0 -1  1  2 -2  2  0  0  0 -2  1  0  2 -1
+ -1  1  1  1  1  0  0  0 -1  0  1  0  1  1 -1  0  0  1  0  1  2  1  0  0
+  0  0  0  0  1  0 -1 -1  0  0  0  2  1  0  0  0  0  0 -1  0  1 -1  1  2
+ -1  0 -1  1  1  2  0  0  1  1  0  0  1 -2  1  0  1 -1  0  0  2  0  1  0
+  0  1  0  0  2 -1  1 -2  0 -1  0 -1  2 -1 -1  1  1  0  0  0  0 -1  1  0
+ -1 -1  0  2  0  0 -2  1  0 -1  1  1 -1  0 -1  1  1 -1  0 -1  0  0  0  1
+ -1  1 -1  0  1  1 -1  1  1  1 -1  0 -2  0  0  0  0  1 -2  0  0  0 -1  0
+  0 -1 -1 -1 -2  2  0  0  0  0  2 -2  1  0  1  0  0 -1 -1  1 -1 -2  0  0
+  0  0  2  1  1  2  1 -1  2 -1  1  0  1  0 -1 -2  0  1  1 -1 -1 -2  0  0
+ -1 -1  0  1  1  0  0 -2 -2 -2  0  1  1 -1 -1  0]
+Finished BKZ with blocksize 25. Time: 1506.147021s.
+Starting BKZ with blocksize 26.
+Finished BKZ with blocksize 26. Time: 54.875444s.
+Starting BKZ with blocksize 27.

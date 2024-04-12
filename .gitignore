@@ -107,4 +107,4 @@ test_kyber_indcpa_local
 NTTRU/
 best_samples_and_outers
 
-*.ipynb_checkpoints/
+.ipynb_checkpoints/
