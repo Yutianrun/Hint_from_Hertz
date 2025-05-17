@@ -108,3 +108,5 @@ test_kyber_indcpa_local
 best_samples_and_outers
 
 .ipynb_checkpoints/
+
+*/plot/*
