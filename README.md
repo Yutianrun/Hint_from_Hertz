@@ -8,10 +8,18 @@ A Hertzbleed-like attack against CPA-Kyber without Compress/Decompress and CCA-N
 **NB:** This source code is CPU-specific.
 
 ## Tested Setup
-We follow the same setup as Hertzbleed attack. Similarly, the repo is fully tested with an Intel i7-9700CPU with the Ubuntu20.04. We cannot ensure  this code  works in virtualized environments, on alternative CPUs, custom hardware configurations, or with different operating systems. 
+We follow the same setup as Hertzbleed attack：
+
+✅ Tested: Intel i7-9700 CPU, Ubuntu 20.04  
+⚠️ Not guaranteed to work on VMs, other CPUs, custom hardware, or different OS.
 
 ### Requirements
-* Sage 10.2
+
+- Python 3
+- Sage 10.2
+- seaborn (Python package)
+- stress-ng (install via `sudo apt install stress-ng`)
+
 
 
 ## Materials
