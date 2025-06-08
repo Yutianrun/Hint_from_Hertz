@@ -16,10 +16,17 @@ def parse_file(fn):
     freq = []
     with open(fn) as f:
         for line in f:
-            a = line.strip()
-            freq.append(int(a))
-
-    return  np.array(freq)
+            # Split the line and get the last element (frequency)
+            parts = line.strip().split()
+            if len(parts) > 0:  # Ensure line is not empty
+                try:
+                    # Get the last part as frequency
+                    freq_value = parts[-1]
+                    freq.append(int(freq_value))
+                except ValueError:
+                    # Skip lines that can't be converted to int
+                    continue
+    return np.array(freq)
 
 
 # Density Plot and Histogram
