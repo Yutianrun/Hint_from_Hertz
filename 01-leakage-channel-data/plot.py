@@ -106,13 +106,50 @@ def main():
             weights.append(np.ones_like(samples_filtered)/float(len(samples_filtered)))
         
         # Create histogram
-        plt.figure(figsize=(6, 4))
-        bins = np.linspace(min([min(d) for d in datas]), max([max(d) for d in datas]), 20)
-        plt.hist(datas, alpha=0.5, bins=bins, weights=weights, label=labels, align="left", density=True)
-        plt.xlabel('Frequency (GHz)')
-        plt.ylabel('Probability density')
-        plt.legend(fontsize=8)
-        plt.tight_layout()
+        plt.figure(figsize=(3, 2))
+
+        # Calculate approximate data range
+        min_value = min([min(d) for d in datas])
+        max_value = max([max(d) for d in datas])
+
+        # Round all frequency values to nearest 0.1
+        rounded_datas = []
+        for data in datas:
+            # Round each data point to nearest 0.1
+            rounded = [np.round(val * 10) / 10 for val in data]
+            rounded_datas.append(rounded)
+
+        # Set unified main frequency points
+        main_freqs = sorted(list(set(np.round(np.concatenate(rounded_datas) * 10) / 10)))
+        if len(main_freqs) > 2:
+            # Find the two most common frequency values
+            freq_counts = {}
+            for data in rounded_datas:
+                for val in data:
+                    rounded_val = np.round(val * 10) / 10
+                    freq_counts[rounded_val] = freq_counts.get(rounded_val, 0) + 1
+            
+            # Sort by frequency count
+            main_freqs = sorted(freq_counts.items(), key=lambda x: x[1], reverse=True)[:2]
+            main_freqs = [freq[0] for freq in main_freqs]
+            main_freqs.sort()
+
+        min_freq = min(main_freqs)
+        max_freq = max(main_freqs)
+
+        # Set frequency range and tick marks
+        bins = np.arange(min_freq - 0.1, max_freq + 0.2, 0.1)
+
+        # Draw histogram with smaller font size
+        plt.hist(rounded_datas, alpha=0.5, bins=bins, weights=weights, label=labels, align="left", density=True)
+        plt.xlabel('Frequency (GHz)', fontsize=10)
+        plt.ylabel('Probability density', fontsize=10)
+
+        plt.xlim(min_freq - 0.05, max_freq + 0.05)
+        # Set smaller font size for tick labels
+        plt.xticks([min_freq, max_freq])
+        plt.legend(fontsize=7)  # Reduce legend font size
+        plt.tight_layout(pad=0.1)
         plt.savefig("./plot/hist-freq.pdf", dpi=300)
         plt.close()
 
@@ -168,9 +205,9 @@ def main():
             # Plot drop distribution
             plt.figure(figsize=(6, 4))
             plot_pdf(datas, labels)
-            plt.xlabel('Seconds before steady state')
-            plt.ylabel('Probability density')
-            plt.legend(fontsize=8)
+            plt.xlabel('Seconds before steady state', fontsize=8)
+            plt.ylabel('Probability density', fontsize=8)
+            plt.legend(fontsize=7)
             plt.tight_layout()
             plt.savefig("./plot/hist-drop-idx.pdf", dpi=300)
             plt.close()
