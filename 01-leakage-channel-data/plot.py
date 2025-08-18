@@ -60,6 +60,20 @@ def main():
 
     # Read and process data files
     out_files = sorted(glob.glob(args.folder + "/freq_*"))
+    if len(out_files) == 0:
+        print(f"[steady] No data files found: {args.folder}/freq_*\nPlease ensure the directory exists and contains files starting with 'freq_'.")
+        # Provide a small hint if the user passed a parent or a prefix directory
+        parent = os.path.dirname(args.folder.rstrip('/')) or '.'
+        if os.path.isdir(parent):
+            try:
+                candidates = [d for d in os.listdir(parent) if d.startswith(os.path.basename(args.folder))]
+                if candidates:
+                    print("Similar directories found:")
+                    for d in candidates:
+                        print(f"  - {os.path.join(parent, d)}")
+            except Exception:
+                pass
+        return
     for f in out_files:
         label = "_".join(f.split("/")[-1].split(".")[0].split("_")[1:-1])
         rept_idx = f.split("/")[-1].split(".")[0].split("_")[-1]
@@ -103,7 +117,15 @@ def main():
             
             datas.append(samples_filtered)
             labels.append(f"hw={label}")
-            weights.append(np.ones_like(samples_filtered)/float(len(samples_filtered)))
+            # Keep empty weights for empty lists; will be filtered out later
+            weights.append(np.ones_like(samples_filtered)/float(len(samples_filtered)) if len(samples_filtered) > 0 else np.array([]))
+        
+        # Filter out empty datasets to avoid min/max failures later
+        non_empty = [(d, l, w) for d, l, w in zip(datas, labels, weights) if len(d) > 0]
+        if not non_empty:
+            print("[steady] All datasets are empty after filtering; cannot plot histogram. Please check input directory or relax filtering criteria.")
+            return
+        datas, labels, weights = map(list, zip(*non_empty))
         
         # Create histogram
         plt.figure(figsize=(3, 2))

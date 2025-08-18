@@ -7,7 +7,7 @@ TOTAL_LOGICAL_CORES=`grep '^core id' /proc/cpuinfo | wc -l`
 sudo modprobe msr
 
 # Setup
-samples=10000		# 50 seconds
+samples=10000		# 10 seconds
 outer=30			# 30 reps
 num_thread=$TOTAL_LOGICAL_CORES
 date=`date +"%m%d-%H%M"`
@@ -16,7 +16,7 @@ date=`date +"%m%d-%H%M"`
 echo "This script will take about $(((10)*$outer*3/60+10)) minutes. Reduce 'outer' if you want a shorter run."
 
 # Warmup
-stress-ng -q --cpu $TOTAL_LOGICAL_CORES -t 1m
+stress-ng -q --cpu $TOTAL_LOGICAL_CORES -t 10m
 
 # Run
 sudo rm -rf out
