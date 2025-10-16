@@ -9,31 +9,31 @@ AVXOBJ:=obj/poly_avx.o obj/consts_avx.o obj/cbd_avx.o obj/fips202_avx.o obj/fips
 AVXOBJ_ntt= obj/ntt_avx.o obj/invntt_avx.o  obj/shuffle_avx.o obj/fq_avx.o obj/basemul_avx.o
 Driver_obj=obj/driver_avx.o obj/driver_ref.o
 
-all: obj bin out data  driver_ref driver_avx driver_ref_two_pair driver_avx_two_pair
+all: obj bin out data  driver_ref driver_avx driver_ref_dual driver_avx_dual
 # driver_avx
 
 driver_ref: obj/driver_ref.o $(UTILS) $(REFOBJ)
-	$(CC) -o bin/$@ $^ $(LIBS) 
+	$(CC) -o bin/$@ $^ $(LIBS)
 
 driver_avx: obj/driver_avx.o $(UTILS) $(AVXOBJ) $(AVXOBJ_ntt)  obj/randombytes_ref.o
 	$(CC) $(AVXFLAGS) -o $ bin/$@ $^  $(LIBS) kyber/avx2/keccak4x/KeccakP-1600-times4-SIMD256.c
 
-driver_ref_two_pair: obj/driver_ref_two_pair.o $(UTILS) $(REFOBJ)
-	$(CC) -o bin/$@ $^ $(LIBS) 
+driver_ref_dual: obj/driver_ref_dual.o $(UTILS) $(REFOBJ)
+	$(CC) -o bin/$@ $^ $(LIBS)
 
-driver_avx_two_pair: obj/driver_avx_two_pair.o $(UTILS) $(AVXOBJ) $(AVXOBJ_ntt)  obj/randombytes_ref.o
+driver_avx_dual: obj/driver_avx_dual.o $(UTILS) $(AVXOBJ) $(AVXOBJ_ntt)  obj/randombytes_ref.o
 	$(CC) $(AVXFLAGS) -o $ bin/$@ $^  $(LIBS) kyber/avx2/keccak4x/KeccakP-1600-times4-SIMD256.c
 
-obj/driver_ref.o: driver_ref.c 
+obj/driver_ref.o: driver_ref.c
 	$(CC) -c $(CFLAGS) -DSLEEP=0 -o  $@ $<
 
-obj/driver_avx.o: driver_avx.c 
+obj/driver_avx.o: driver_avx.c
 	$(CC) -c $(CFLAGS) $(AVXFLAGS) -DSLEEP=0 -o $@ $<
 
-obj/driver_ref_two_pair.o: driver_ref_two_pair.c 
+obj/driver_ref_dual.o: driver_ref_dual.c
 	$(CC) -c $(CFLAGS) -DSLEEP=0 -o  $@ $<
 
-obj/driver_avx_two_pair.o: driver_avx_two_pair.c 
+obj/driver_avx_dual.o: driver_avx_dual.c
 	$(CC) -c $(CFLAGS) $(AVXFLAGS) -DSLEEP=0 -o $@ $<
 
 $(REFOBJ): obj/%_ref.o: kyber/ref/%.c

@@ -16,8 +16,9 @@ struct args_t {
 	poly test_poly;
 };
 
-static int iters;
-static __attribute__((noinline)) void victim(void *varg)
+static uint64_t iters;
+// Fixed: Return type changed from void to int for clone() compatibility
+static __attribute__((noinline)) int victim(void *varg)
 {
 
 	struct args_t *arg = varg;
@@ -26,6 +27,8 @@ static __attribute__((noinline)) void victim(void *varg)
 		poly_invntt_tomont(&arg->test_poly);
 		poly_ntt(&arg->test_poly);
 	}
+
+	return 0;  // Fixed: Added return statement for clone() compatibility
 
 	// printf("before invntt:\n");
 	// for(int i =0;i<256;i++)
@@ -59,13 +62,16 @@ static __attribute__((noinline)) void victim(void *varg)
 }
 
 // Collects traces
-static __attribute__((noinline)) int monitor(int iszero)
+// Fixed: Changed parameter type from int to void* for clone() compatibility
+static __attribute__((noinline)) int monitor(void *arg)
 {
 	static int rept_index = 0;
+	// Fixed: Extract iszero from void* arg
+	int iszero = (int)(long)arg;
 
 	// Pin monitor to a single CPU
 	pin_cpu(attacker_core_ID);
-	
+
 	// Set filename
 	// The format is, e.g., ./out/freq_02_2330.out
 	// where 02 is the selector and 2330 is an index to prevent overwriting files
@@ -148,7 +154,8 @@ int main(int argc, char *argv[])
 		int tids[ntasks];
 		uint rand_pair;
 		do{
-			randombytes(&rand_pair, sizeof(rand_pair));
+			// Fixed: Cast uint* to uint8_t* for randombytes() compatibility
+			randombytes((uint8_t*)&rand_pair, sizeof(rand_pair));
 			rand_pair %=128;
 		}while(rand_pair==0);
 
@@ -162,8 +169,9 @@ int main(int argc, char *argv[])
 		// rand_pair holds the same.
 	
 
-		randombytes(&C00C.coeffs[0],sizeof(C00C.coeffs[0]));
-		randombytes(&C00C.coeffs[2*rand_pair+1],sizeof(C00C.coeffs[2*rand_pair+1]));	
+		// Fixed: Cast int16_t* to uint8_t* for randombytes() compatibility
+		randombytes((uint8_t*)&C00C.coeffs[0],sizeof(C00C.coeffs[0]));
+		randombytes((uint8_t*)&C00C.coeffs[2*rand_pair+1],sizeof(C00C.coeffs[2*rand_pair+1]));	
 		poly_reduce(&C00C);
 
 		memcpy(&arg.test_poly, &C00C,sizeof(C00C));
@@ -180,7 +188,8 @@ int main(int argc, char *argv[])
 		}
 
 		// Start the monitor thread
-		clone(&monitor, tstacks + (ntasks + 1) * STACK_SIZE, CLONE_VM | SIGCHLD, 3);
+		// Fixed: Pass 3 as void* instead of int
+		clone(&monitor, tstacks + (ntasks + 1) * STACK_SIZE, CLONE_VM | SIGCHLD, (void*)3);
 
 		// Join monitor thread
 		wait(NULL);
@@ -205,8 +214,9 @@ int main(int argc, char *argv[])
 
 
 		// C0, .... C0,...... ; the next C0 is on index==rand_pair;
-		randombytes(&C0C0.coeffs[0],sizeof(C0C0.coeffs[0]));
-		randombytes(&C0C0.coeffs[2*rand_pair],sizeof(C0C0.coeffs[1]));		
+		// Fixed: Cast int16_t* to uint8_t* for randombytes() compatibility
+		randombytes((uint8_t*)&C0C0.coeffs[0],sizeof(C0C0.coeffs[0]));
+		randombytes((uint8_t*)&C0C0.coeffs[2*rand_pair],sizeof(C0C0.coeffs[1]));		
 		poly_reduce(&C0C0);
 
 	#if (SLEEP == 1)
@@ -223,7 +233,8 @@ int main(int argc, char *argv[])
 		}
 
 		// Start the monitor thread
-		clone(&monitor, tstacks + (ntasks + 1) * STACK_SIZE, CLONE_VM | SIGCHLD, 4);
+		// Fixed: Pass 4 as void* instead of int
+		clone(&monitor, tstacks + (ntasks + 1) * STACK_SIZE, CLONE_VM | SIGCHLD, (void*)4);
 
 		// Join monitor thread
 		wait(NULL);

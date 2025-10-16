@@ -23,8 +23,8 @@ sudo rm -rf out
 mkdir out
 sudo rm -rf input.txt
 
-sudo ./bin/driver_avx_two_pair ${num_thread} ${samples} ${outer}
-cp -r out data/out-avx-two-pair-${date}
+sudo ./bin/driver_ref_dual ${num_thread} ${samples} ${outer}
+cp -r out data/out-ref-dual-${date}
 
 # Unload MSR module
 sudo modprobe -r msr

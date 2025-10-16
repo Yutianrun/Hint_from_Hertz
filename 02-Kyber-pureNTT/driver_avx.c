@@ -6,240 +6,209 @@
 #include "../util/freq-utils.h"
 #include "../util/util.h"
 #include "../util/rapl-utils.h"
+#include "kyber/ref/randombytes.h"
 
-volatile static int attacker_core_ID;
+/* Configuration */
+#define TIME_BETWEEN_MEASUREMENTS 1000000L  // 1 millisecond
+#define STACK_SIZE (8192 * 3)
+#define VICTIM_WARMUP_TIME 10  // seconds
 
-#define TIME_BETWEEN_MEASUREMENTS 1000000L // 1 millisecond
+/* Global state */
+static volatile int monitor_core_id;
+static uint64_t measurement_samples;
 
-#define STACK_SIZE 8192*3
-
-struct args_t {
+/* Thread arguments */
+typedef struct {
 	poly test_poly;
-};
+} victim_args_t;
 
-static int iters;
-static __attribute__((noinline)) void victim(void *varg)
+/* Victim thread: continuously performs NTT operations
+ * Note: AVX2 implementation requires a local copy due to alignment requirements
+ */
+static __attribute__((noinline)) int victim_thread(void *arg)
 {
-
-	struct args_t *arg = varg;
+	victim_args_t *victim_args = (victim_args_t *)arg;
 	poly temp;
-    memcpy(&temp, &arg->test_poly, sizeof(temp));
+	memcpy(&temp, &victim_args->test_poly, sizeof(temp));
 
-	while(1)
-	{
+	while (1) {
 		poly_invntt_tomont(&temp);
 		poly_ntt(&temp);
 		poly_reduce(&temp);
 	}
 
-	// printf("before invntt:\n");
-	// for(int i =0;i<256;i++)
-	// {
-	// 	// printf("%d ",arg->test_poly.coeffs[i]);
-	// 	printf("%d ",temp.coeffs[i]);
-	// }
-
-	// // poly_invntt_tomont(&arg->test_poly);
-	// poly_invntt_tomont(&temp);
-	// printf("invntt:\n");
-	// for(int i =0;i<256;i++)
-	// {
-	// 	// printf("%d ",arg->test_poly.coeffs[i]);
-	// 	printf("%d ",temp.coeffs[i]);
-	// }
-	// printf("\n");
-	// // poly_ntt(&arg->test_poly);
-	// poly_ntt(&temp);
-	// // poly_reduce(&arg->test_poly);
-	// poly_reduce(&temp);
-	// printf("ntt:\n");
-	// for(int i =0;i<256;i++)
-	// {
-	// 	// printf("%d ",arg->test_poly.coeffs[i]);
-	// 	printf("%d ",temp.coeffs[i]);
-	// }
-	// printf("\n");
-
-	
+	return 0;
 }
 
-// Collects traces
-static __attribute__((noinline)) int monitor(int iszero)
+/* Monitor thread: collects frequency and energy measurements */
+static __attribute__((noinline)) int monitor_thread(void *arg)
 {
-	static int rept_index = 0;
+	static int trace_index = 0;
+	int test_id = (int)(long)arg;
 
-	// Pin monitor to a single CPU
-	pin_cpu(attacker_core_ID);
-	
-	// Set filename
-	// The format is, e.g., ./out/freq_02_2330.out
-	// where 02 is the selector and 2330 is an index to prevent overwriting files
-	char output_filename[64];
-	sprintf(output_filename, "./out/freq_%02d_%06d.out", iszero, rept_index);
-	rept_index += 1;
+	// Pin to monitoring core
+	pin_cpu(monitor_core_id);
 
-	// Prepare output file
-	FILE *output_file = fopen((char *)output_filename, "w");
-	if (output_file == NULL) {
-		perror("output file");
+	// Open output file
+	char filename[64];
+	snprintf(filename, sizeof(filename), "./out/freq_%02d_%06d.out", test_id, trace_index++);
+
+	FILE *output = fopen(filename, "w");
+	if (!output) {
+		perror("Failed to open output file");
+		return 1;
 	}
 
-	// Prepare
-	double energy, prev_energy = rapl_msr(attacker_core_ID, PP0_ENERGY);
-	struct freq_sample_t freq_sample, prev_freq_sample = frequency_msr_raw(attacker_core_ID);
+	// Initialize measurements
+	double prev_energy = rapl_msr(monitor_core_id, PP0_ENERGY);
+	struct freq_sample_t prev_freq = frequency_msr_raw(monitor_core_id);
 
 	// Collect measurements
-	for (uint64_t i = 0; i < iters; i++) {
-
-		// Wait before next measurement
+	for (uint64_t i = 0; i < measurement_samples; i++) {
+		// Wait before next sample
 		nanosleep((const struct timespec[]){{0, TIME_BETWEEN_MEASUREMENTS}}, NULL);
 
-		// Collect measurement
-		energy = rapl_msr(attacker_core_ID, PP0_ENERGY);
-		freq_sample = frequency_msr_raw(attacker_core_ID);
-		// printf("energy:%f, prev_engy:%f\n", energy,prev_energy);
-		// Store measurement
-		uint64_t aperf_delta = freq_sample.aperf - prev_freq_sample.aperf;
-		uint64_t mperf_delta = freq_sample.mperf - prev_freq_sample.mperf;
-		uint32_t khz = (maximum_frequency * aperf_delta) / mperf_delta;
-		fprintf(output_file, "%.15f %" PRIu32 "\n", energy - prev_energy, khz);
+		// Read current values
+		double energy = rapl_msr(monitor_core_id, PP0_ENERGY);
+		struct freq_sample_t freq = frequency_msr_raw(monitor_core_id);
 
-		// Save current
+		// Calculate frequency
+		uint64_t aperf_delta = freq.aperf - prev_freq.aperf;
+		uint64_t mperf_delta = freq.mperf - prev_freq.mperf;
+		uint32_t khz = (maximum_frequency * aperf_delta) / mperf_delta;
+
+		// Write to file
+		fprintf(output, "%.15f %" PRIu32 "\n", energy - prev_energy, khz);
+
+		// Update previous values
 		prev_energy = energy;
-		prev_freq_sample = freq_sample;
+		prev_freq = freq;
 	}
 
-
-	// Clean up
-	fclose(output_file);
+	fclose(output);
 	return 0;
+}
+
+/* Initialize a polynomial with given pattern
+ * For AVX2: coeffs[0] and coeffs[16] due to AVX2 register layout
+ * AVX2 stores even-indexed coeffs [r[0], r[2], ..., r[30]] in first 16 elements
+ */
+static void init_poly_pattern(poly *p, int num_nonzero_coeffs)
+{
+	// Clear all coefficients
+	memset(p->coeffs, 0, sizeof(p->coeffs));
+
+	// Set random non-zero coefficients
+	if (num_nonzero_coeffs >= 1) {
+		randombytes((uint8_t *)&p->coeffs[0], sizeof(p->coeffs[0]));
+	}
+	if (num_nonzero_coeffs >= 2) {
+		// For AVX2, the next odd-indexed coeff is at position 16
+		randombytes((uint8_t *)&p->coeffs[16], sizeof(p->coeffs[16]));
+	}
+
+	poly_reduce(p);
+}
+
+/* Start victim threads */
+static void start_victim_threads(int *tids, int num_threads, char *stacks,
+                                  int stack_size, victim_args_t *args)
+{
+	for (int i = 0; i < num_threads; i++) {
+		tids[i] = clone(&victim_thread,
+		                stacks + (num_threads - i) * stack_size,
+		                CLONE_VM | SIGCHLD,
+		                args);
+	}
+}
+
+/* Stop and wait for victim threads */
+static void stop_victim_threads(int *tids, int num_threads)
+{
+	for (int i = 0; i < num_threads; i++) {
+		syscall(SYS_tgkill, tids[i], tids[i], SIGTERM);
+		wait(NULL);  // Reap zombie
+	}
+}
+
+/* Run a single test iteration */
+static void run_test(int test_id, poly *test_poly, int num_threads, char *stacks)
+{
+	victim_args_t args;
+	memcpy(&args.test_poly, test_poly, sizeof(poly));
+
+	// Start victim threads
+	int tids[num_threads];
+	start_victim_threads(tids, num_threads, stacks, STACK_SIZE, &args);
+
+	// Wait for victims to warm up
+	sleep(VICTIM_WARMUP_TIME);
+
+	// Start monitor thread
+	clone(&monitor_thread,
+	      stacks + (num_threads + 1) * STACK_SIZE,
+	      CLONE_VM | SIGCHLD,
+	      (void *)(long)test_id);
+
+	// Wait for monitor to finish
+	wait(NULL);
+
+	// Stop victim threads
+	stop_victim_threads(tids, num_threads);
 }
 
 int main(int argc, char *argv[])
 {
-	// Check arguments
+	// Parse arguments
 	if (argc != 4) {
-		fprintf(stderr, "Wrong Input! Enter: %s <ntasks> <samples> <outer>\n", argv[0]);
+		fprintf(stderr, "Usage: %s <num_threads> <samples> <iterations>\n", argv[0]);
 		exit(EXIT_FAILURE);
 	}
 
-	// Read in args
-	int ntasks;
-	int outer;
-	sscanf(argv[1], "%d", &ntasks);
-	if (ntasks < 0) {
-		fprintf(stderr, "ntasks cannot be negative!\n");
-		exit(1);
-	}
-	sscanf(argv[2], "%" PRIu64, &(iters));
-	sscanf(argv[3], "%d", &outer);
-	if (outer < 0) {
-		fprintf(stderr, "outer cannot be negative!\n");
-		exit(1);
+	int num_threads = atoi(argv[1]);
+	measurement_samples = strtoull(argv[2], NULL, 10);
+	int num_iterations = atoi(argv[3]);
+
+	if (num_threads <= 0 || num_iterations <= 0) {
+		fprintf(stderr, "Error: num_threads and iterations must be positive\n");
+		exit(EXIT_FAILURE);
 	}
 
-	// Set the scheduling priority to high to avoid interruptions
-	// (lower priorities cause more favorable scheduling, and -20 is the max)
+	// Set high priority for better timing accuracy
 	setpriority(PRIO_PROCESS, 0, -20);
 
-	// Prepare up monitor/attacker
-	attacker_core_ID = 0;
-	set_frequency_units(attacker_core_ID);
-	frequency_msr_raw(attacker_core_ID);
-	set_rapl_units(attacker_core_ID);
-	rapl_msr(attacker_core_ID, PP0_ENERGY);
+	// Initialize monitoring core
+	monitor_core_id = 0;
+	set_frequency_units(monitor_core_id);
+	frequency_msr_raw(monitor_core_id);
+	set_rapl_units(monitor_core_id);
+	rapl_msr(monitor_core_id, PP0_ENERGY);
 
-	// Allocate memory for the threads
-	char *tstacks = mmap(NULL, (ntasks + 1) * STACK_SIZE, PROT_READ | PROT_WRITE, MAP_PRIVATE | MAP_ANONYMOUS, -1, 0);
-
-	//1. non-zero tests.
-	struct args_t arg;
-	for (int i = 0; i < outer;i++)
-	{
-
-		poly non_zero;
-
-		for(int i = 0 ; i < 256; ++i)
-		{
-			non_zero.coeffs[i] = 0;
-		}
-		// In avx implementation, the even indexes of 16bit-coeffients [r[0],r[2], ..., r[32]] are in in one 256bit-avx2-register,
-		// which is aligned as [poly.coeff[0], poly.coeff[1], ..., poly.coeff[15]].
-		// Hence, the first odd index is in poly.coeff[16], the next avx2 register.
-
-		randombytes(&non_zero.coeffs[0],sizeof(non_zero.coeffs[0]));
-		randombytes(&non_zero.coeffs[16],sizeof(non_zero.coeffs[16]));		
-		poly_reduce(&non_zero);
-
-
-	#if (SLEEP == 1)
-			// Cool down
-			sleep(30);
-	#endif
-
-		memcpy(&arg.test_poly, &non_zero,sizeof(non_zero));
-
-		// Start victim threads
-		int tids[ntasks];
-		for (int tnum = 0; tnum < ntasks; tnum++) {
-			tids[tnum] = clone(&victim, tstacks + (ntasks - tnum) * STACK_SIZE, CLONE_VM | SIGCHLD, &arg);
-		}
-
-		// Start the monitor thread
-		clone(&monitor, tstacks + (ntasks + 1) * STACK_SIZE, CLONE_VM | SIGCHLD, 0);
-
-		// Join monitor thread
-		wait(NULL);
-
-		// Kill victim threads
-		for (int tnum = 0; tnum < ntasks; tnum++) {
-			syscall(SYS_tgkill, tids[tnum], tids[tnum], SIGTERM);
-
-			// Need to join o/w the threads remain as zombies
-			// https://askubuntu.com/a/427222/1552488
-			wait(NULL);
-		}
-
-
-			// 2. one-zero poly invntt
-
-		poly one_zero;
-
-		for(int i = 0 ; i < 256; ++i)
-		{
-			one_zero.coeffs[i] = 0;
-		}
-
-		one_zero.coeffs[0] = non_zero.coeffs[0]; 
-		// randombytes(&one_zero.coeffs[0],sizeof(one_zero.coeffs[0]));
-		poly_reduce(&one_zero);
-
-		memcpy(&arg.test_poly, &one_zero,sizeof(one_zero));
-
-		#if (SLEEP == 1)
-			// Cool down
-			sleep(30);
-		#endif
-
-			// Start victim threads
-			// int tids[ntasks];
-		for (int tnum = 0; tnum < ntasks; tnum++) {
-			tids[tnum] = clone(&victim, tstacks + (ntasks - tnum) * STACK_SIZE, CLONE_VM | SIGCHLD, &arg);
-		}
-
-		// Start the monitor thread
-		clone(&monitor, tstacks + (ntasks + 1) * STACK_SIZE, CLONE_VM | SIGCHLD, 1);
-
-		// Join monitor thread
-		wait(NULL);
-
-		// Kill victim threads
-		for (int tnum = 0; tnum < ntasks; tnum++) {
-			syscall(SYS_tgkill, tids[tnum], tids[tnum], SIGTERM);
-
-			// Need to join o/w the threads remain as zombies
-			// https://askubuntu.com/a/427222/1552488
-			wait(NULL);
-		}	
+	// Allocate thread stacks
+	size_t total_stack_size = (num_threads + 1) * STACK_SIZE;
+	char *thread_stacks = mmap(NULL, total_stack_size,
+	                            PROT_READ | PROT_WRITE,
+	                            MAP_PRIVATE | MAP_ANONYMOUS, -1, 0);
+	if (thread_stacks == MAP_FAILED) {
+		perror("Failed to allocate thread stacks");
+		exit(EXIT_FAILURE);
 	}
+
+	// Run tests
+	for (int iteration = 0; iteration < num_iterations; iteration++) {
+		poly test_poly;
+
+		// Test 1: Two non-zero coefficients (AVX2 layout: positions 0 and 16)
+		init_poly_pattern(&test_poly, 2);
+		run_test(0, &test_poly, num_threads, thread_stacks);
+
+		// Test 2: Single non-zero coefficient
+		init_poly_pattern(&test_poly, 1);
+		run_test(1, &test_poly, num_threads, thread_stacks);
+	}
+
+	// Cleanup
+	munmap(thread_stacks, total_stack_size);
+
+	return 0;
 }
