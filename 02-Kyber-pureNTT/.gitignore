@@ -1,0 +1,23 @@
+# Build artifacts
+bin/driver_*
+bin/build/
+
+# Temporary data
+data/tmp/
+
+# Backup files
+bak/
+
+# Plots
+plot/*.png
+
+# Logs
+log/
+run_all.log
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Old/backup Kyber versions
+kyber.old/

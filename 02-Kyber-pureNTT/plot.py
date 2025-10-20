@@ -32,7 +32,12 @@ def main():
     # Parse arguments
     parser = argparse.ArgumentParser(description='Plot frequency distribution from measurement data')
     parser.add_argument('folder', help='Input folder containing freq_*.out files')
+    parser.add_argument('--output', help='Additional output directory for plots', default=None)
     args = parser.parse_args()
+
+    # Prepare additional output directory if specified
+    if args.output:
+        os.makedirs(args.output, exist_ok=True)
 
     in_dir = args.folder
 
@@ -133,17 +138,26 @@ def main():
 
     # Save plot with type and date in filename
     if type_str and date_str:
-        output_filename = f"./plot/hist-freq-{type_str}-{date_str}.png"
+        filename = f"hist-freq-{type_str}-{date_str}.png"
     elif type_str:
-        output_filename = f"./plot/hist-freq-{type_str}.png"
+        filename = f"hist-freq-{type_str}.png"
     elif date_str:
-        output_filename = f"./plot/hist-freq-{date_str}.png"
+        filename = f"hist-freq-{date_str}.png"
     else:
-        output_filename = "./plot/hist-freq.png"
+        filename = "hist-freq.png"
 
+    # Save to default plot directory
+    output_filename = f"./plot/{filename}"
     plt.savefig(output_filename, dpi=300)
-    plt.clf()
     print(f"\nPlot saved to {output_filename}")
+
+    # Save to additional output directory if specified
+    if args.output:
+        additional_output = os.path.join(args.output, filename)
+        plt.savefig(additional_output, dpi=300)
+        print(f"Plot also saved to {additional_output}")
+
+    plt.clf()
 
 
 if __name__ == "__main__":
