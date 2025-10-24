@@ -32,12 +32,15 @@ static __attribute__((noinline)) int monitor(void *in)
 	// Pin monitor to a single CPU
 	pin_cpu(attacker_core_ID);
 
-	// Set filename
-	// The format is, e.g., ./out/all_02_2330.out
-	// where 02 is the selector and 2330 is an index to prevent overwriting files
-	char output_filename[64];
-	sprintf(output_filename, "./out/avx_%01d_%03d_%05d_%06d.out", arg->guess_z, arg->pair_index, arg->number_thread, rept_index);
-	// sprintf(output_filename, "./out/all_%01d_%02d_%03d_%05d_%06d.out", arg->guess_z, arg->keyindex, arg->bitindex, arg->number_thread, rept_index);
+	// Set filename with timestamp
+	// The format is, e.g., ./logs/avx_1760_000_00008_000001_20250121_123045.out
+	time_t now = time(NULL);
+	struct tm *t = localtime(&now);
+	char output_filename[128];
+	sprintf(output_filename, "./logs/avx_%04d_%03d_%05d_%06d_%04d%02d%02d_%02d%02d%02d.out",
+		arg->guess_z, arg->pair_index, arg->number_thread, rept_index,
+		t->tm_year + 1900, t->tm_mon + 1, t->tm_mday,
+		t->tm_hour, t->tm_min, t->tm_sec);
 	rept_index += 1;
 
 	// Prepare output file
