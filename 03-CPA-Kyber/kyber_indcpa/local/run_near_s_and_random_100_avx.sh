@@ -7,8 +7,8 @@ TOTAL_LOGICAL_CORES=`grep '^core id' /proc/cpuinfo | wc -l`
 sudo modprobe msr
 
 # Setup
-samples=20000	# 400 seconds
-outer=10
+samples=6000	# 120 seconds
+outer=8
 date=`date +"%m%d-%H%M"`
 thread=8 #FIXME
 range_to_search=2
@@ -17,8 +17,8 @@ range_to_search=2
 echo "This script will take about $(($(($samples/1000))*$outer*100/60)) minitues. Reduce 'outer' if you want a shorter run."
 
 # Prepare
-sudo rm -rf out
-mkdir out
+sudo rm -rf data/tmp
+mkdir -p data/tmp
 sudo rm -rf input.txt
 
 # RIGHT S 1760/2923
@@ -44,7 +44,12 @@ stress-ng -q --cpu $TOTAL_LOGICAL_CORES -t 10m
 
 # Run
 sudo ./bin/driver_indcpa_avx ${samples} ${outer}
-cp -r out data/out-${date}
+
+# Change ownership to current user
+sudo chown -R $USER:$USER data/tmp
+
+# Archive results
+cp -r data/tmp data/out-${date}
 
 # Unload MSR module
 sudo modprobe -r msr

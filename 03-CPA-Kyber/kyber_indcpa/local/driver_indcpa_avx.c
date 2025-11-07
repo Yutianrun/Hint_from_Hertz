@@ -33,11 +33,11 @@ static __attribute__((noinline)) int monitor(void *in)
 	pin_cpu(attacker_core_ID);
 
 	// Set filename
-	// The format is, e.g., ./out/all_02_2330.out
+	// The format is, e.g., ./data/tmp/all_02_2330.out
 	// where 02 is the selector and 2330 is an index to prevent overwriting files
 	char output_filename[64];
-	sprintf(output_filename, "./out/avx_%01d_%d_%03d_%05d_%06d.out", arg->guess_z1, arg->guess_z2, arg->pair_index, arg->number_thread, rept_index);
-	// sprintf(output_filename, "./out/all_%01d_%02d_%03d_%05d_%06d.out", arg->guess_z, arg->keyindex, arg->bitindex, arg->number_thread, rept_index);
+	sprintf(output_filename, "./data/tmp/avx_%01d_%d_%03d_%05d_%06d.out", arg->guess_z1, arg->guess_z2, arg->pair_index, arg->number_thread, rept_index);
+	// sprintf(output_filename, "./data/tmp/all_%01d_%02d_%03d_%05d_%06d.out", arg->guess_z, arg->keyindex, arg->bitindex, arg->number_thread, rept_index);
 	rept_index += 1;
 
 	// Prepare output file

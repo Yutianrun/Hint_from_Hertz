@@ -109,7 +109,7 @@ best_samples_and_outers
 
 .ipynb_checkpoints/
 
-*/plot/*
+**/plot/
 CLAUDE.md
 AGENTS.md
 02b-Kyber-pureNTT-time/local/logs/*
