@@ -39,11 +39,11 @@ int main(int argc, char *argv[]) {
     
     // int key_index= atoi(argv[5]);
 
-    printf("guess_z1 %d\n", guess_z1); 
-    printf("guess_z2 %d\n", guess_z2); 
-    printf("target_pair_index %d\n", target_pair_index);
-    printf("number_thread %d\n", number_thread); 
-    printf("iteration %d\n", iteration); 
+    // printf("guess_z1 %d\n", guess_z1);
+    // printf("guess_z2 %d\n", guess_z2);
+    // printf("target_pair_index %d\n", target_pair_index);
+    // printf("number_thread %d\n", number_thread);
+    // printf("iteration %d\n", iteration); 
     // printf("key_index %d\n", key_index); 
 
     uint8_t pk[KYBER_INDCPA_PUBLICKEYBYTES];

@@ -237,7 +237,7 @@ def main():
         Case_category = [' ','']
         fig.update_layout(
                     yaxis_title=r'',
-                    xaxis_title='运行频率均值(GHz)'
+                    xaxis_title='Mean Execution Frequency (GHz)'
                     )
         # title='Distribution of Measured Frequency Mean over 10 sk',
         # pio.kaleido.scope.mathjax = None

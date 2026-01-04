@@ -3,6 +3,12 @@
 # Start or stop all NTT frequency measurements
 # Usage: sudo ./start_all.sh [stop|help]
 
+SCRIPT_DIR=$(cd "$(dirname "$0")" && pwd)
+REPO_ROOT=$(cd "$SCRIPT_DIR/.." && pwd)
+LOG_DIR="$REPO_ROOT/log/02-Kyber-pureNTT"
+mkdir -p "$LOG_DIR"
+LOG_FILE="$LOG_DIR/run_all.log"
+
 # Show help
 if [ "$1" = "help" ] || [ "$1" = "-h" ] || [ "$1" = "--help" ]; then
     echo "Usage: sudo ./start_all.sh [COMMAND]"
@@ -55,13 +61,13 @@ echo "Starting all NTT frequency measurements in background..."
 echo ""
 
 # Run in background
-./run_all.sh > run_all.log 2>&1 &
+./run_all.sh > "$LOG_FILE" 2>&1 &
 
 PID=$!
 echo "Process started with PID: $PID"
 echo ""
 echo "To monitor progress:"
-echo "  tail -f run_all.log"
+echo "  tail -f $LOG_FILE"
 echo ""
 echo "To stop measurements:"
 echo "  sudo ./start_all.sh stop"

@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+# Reproduce paper figure: measure near-s and random pairs.
+# For full hint pair search, use hint_pair_search/run.sh
 
 TOTAL_PHYSICAL_CORES=`grep '^core id' /proc/cpuinfo | sort -u | wc -l`
 TOTAL_LOGICAL_CORES=`grep '^core id' /proc/cpuinfo | wc -l`

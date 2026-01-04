@@ -42,7 +42,7 @@ sudo ./run.sh --ref --dual      # Reference + Dual cipher
 sudo ./start_all.sh
 
 # Monitor progress
-tail -f run_all.log
+tail -f ../log/02-Kyber-pureNTT/run_all.log
 
 # Stop measurements and cleanup
 sudo ./start_all.sh stop
@@ -72,7 +72,7 @@ data/
 ├── out-ref-single-MMDD-HHMM/   # Reference single cipher results
 └── out-ref-dual-MMDD-HHMM/     # Reference dual cipher results
 
-run_all.log                      # Combined log for all tests
+../log/02-Kyber-pureNTT/run_all.log  # Combined log for all tests
 ```
 
 ### Plot Results
@@ -152,7 +152,7 @@ sudo apt install stress-ng python3-matplotlib python3-seaborn python3-numpy
 conda install matplotlib seaborn numpy
 ```
 
-> ℹ️ `../kyber/` 目录通过 Git 子模块跟踪官方 [pq-crystals/kyber](https://github.com/pq-crystals/kyber)。更新子模块后别忘了运行 `make clean && make` 以重建驱动。
+> ℹ️ `../kyber/` is tracked as a Git submodule pointing to [pq-crystals/kyber](https://github.com/pq-crystals/kyber). After updating the submodule always run `make clean && make` so the drivers are rebuilt.
 
 ---
 

@@ -13,7 +13,7 @@ def parse_file(fn):
     with open(fn) as f:
         return np.array([int(line.strip()) for line in f])
 
-def plot_pdf(datas, labels):
+def plot_png(datas, labels):
     for data, label in zip(datas, labels):
         sns.distplot(data, label=label, hist=True, kde=True, bins=25)
 
@@ -86,7 +86,7 @@ def main():
             plt.plot(freq_trace_raw)
             plt.xlabel('Time (ms)')
             plt.ylabel('Frequency (GHz)')
-            plt.savefig(f"./plot/freq_{label}_{rept_idx}.pdf", bbox_inches='tight')
+            plt.savefig(f"./plot/freq_{label}_{rept_idx}.png", bbox_inches='tight')
             plt.close()
 
         # Store data for steady state analysis
@@ -172,7 +172,7 @@ def main():
         plt.xticks([min_freq, max_freq])
         plt.legend(fontsize=7)  # Reduce legend font size
         plt.tight_layout(pad=0.1)
-        plt.savefig("./plot/hist-freq.pdf", dpi=300)
+        plt.savefig("./plot/hist-freq.png", dpi=300)
         plt.close()
 
     # Process drop data
@@ -226,12 +226,12 @@ def main():
             
             # Plot drop distribution
             plt.figure(figsize=(6, 4))
-            plot_pdf(datas, labels)
+            plot_png(datas, labels)
             plt.xlabel('Seconds before steady state', fontsize=8)
             plt.ylabel('Probability density', fontsize=8)
             plt.legend(fontsize=7)
             plt.tight_layout()
-            plt.savefig("./plot/hist-drop-idx.pdf", dpi=300)
+            plt.savefig("./plot/hist-drop-idx.png", dpi=300)
             plt.close()
 
 if __name__ == "__main__":

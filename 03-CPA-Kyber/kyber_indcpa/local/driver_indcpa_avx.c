@@ -146,7 +146,7 @@ int main(int argc, char *argv[])
 		// Prepare background stress command
 		char command[256];
 		sprintf(command, "../kyber/avx2/test_kyber_indcpa_local  %d %d %d %d 10000000", arg.guess_z1, arg.guess_z2, arg.pair_index, arg.number_thread);
-		printf("Running: %s\n", command);
+		// printf("Running: %s\n", command);
 
 		// Start LOCAL
 		pthread_create(&thread1, NULL, (void *)&victim, (void *)command);

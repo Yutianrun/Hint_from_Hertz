@@ -222,7 +222,7 @@ def main():
         fig.update_layout(
                     xaxis_title="value of"+ r"$\huge z'$",
                     # yaxis_title='Frequency Means (GHz)',
-                    yaxis_title='运行频率均值(GHz)',
+                    yaxis_title='Mean Execution Frequency (GHz)',
                     legend_font_size=25,
                     margin=dict(l=0,r=0,b=0,t=60)
                     )

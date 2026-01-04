@@ -113,3 +113,11 @@ best_samples_and_outers
 CLAUDE.md
 AGENTS.md
 02b-Kyber-pureNTT-time/local/logs/*
+
+# Grid search experiments
+03-CPA-Kyber/kyber_indcpa/local/grid_search/
+
+# Backup and temporary files
+03-CPA-Kyber/kyber_indcpa/local/.backup/
+03-CPA-Kyber/kyber_indcpa/local/input.txt.backup.*
+03-CPA-Kyber/kyber_indcpa/local/input_tmp_*.txt

@@ -49,7 +49,7 @@ int main(void) {
   for (size_t i = 0; i < 768; i++)
   {
     /* code */
-    b[i]=b[i]*900%7681;   //900为mont的逆
+    b[i]=b[i]*900%7681;   // 900 is the modular inverse used for the Montgomery factor
   }
 
 

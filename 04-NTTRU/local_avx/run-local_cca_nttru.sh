@@ -1,5 +1,27 @@
 #!/usr/bin/env bash
 
+if [[ "$1" == "-h" || "$1" == "--help" ]]; then
+  cat <<'EOF'
+Usage: sudo ./run-local_cca_nttru.sh
+
+Collect local CCA-NTTRU leakage traces with AVX2 drivers.
+The script automatically:
+  • Loads the msr module
+  • Generates a balanced list of selector values (including the known winners)
+  • Warms up the CPU with stress-ng
+  • Runs ./bin/driver_kem for two sessions and archives outputs under data/
+
+Tip: edit the variables near the top (samples, outer, thread) to tune runtime.
+EOF
+  exit 0
+fi
+
+if [ "$EUID" -ne 0 ]; then
+  echo "This experiment requires sudo so we can access MSRs and pin CPU state."
+  echo "Re-run as: sudo $0"
+  exit 1
+fi
+
 TOTAL_PHYSICAL_CORES=`grep '^core id' /proc/cpuinfo | sort -u | wc -l`
 TOTAL_LOGICAL_CORES=`grep '^core id' /proc/cpuinfo | wc -l`
 
@@ -16,7 +38,7 @@ outer=20
 # date=`date +"%m%d-%H%M"`
 thread=300
 
-echo "This script will take about $(($(($samples/1000+10))*$outer*100/60+10)) minitues. Reduce 'outer' if you want a shorter run."
+echo "This script will take about $(($(($samples/1000+10))*$outer*100/60+10)) minutes. Reduce 'outer' if you want a shorter run."
 # Prepare
 # sudo rm -rf out
 # mkdir out
@@ -32,15 +54,15 @@ echo "This script will take about $(($(($samples/1000+10))*$outer*100/60+10)) mi
 
 
 
-# 生成指定数量的随机数字并排序
+# Generate a reproducible set of selector values and keep the right answers in the mix
 generate_and_sort_numbers() {
   local numbers=()
-  # 生成17个不等于942、6684、7359的随机数字
+  # Pick 97 random values that avoid the known correct triplet
   for i in {1..97}; do
     local rand_num
     while true; do
       rand_num=$((RANDOM % 7680 + 1))
-      # 检查数字是否已经存在于数组中，以及是否等于指定的三个数字
+      # Reject duplicates or the correct answers so they can be injected explicitly later
       if [[ ! " ${numbers[@]} " =~ " $rand_num " ]] && [ $rand_num -ne 942 ] && [ $rand_num -ne 6684 ] && [ $rand_num -ne 7359 ]; then
         break
       fi
@@ -48,10 +70,10 @@ generate_and_sort_numbers() {
     numbers+=( $rand_num )
   done
 
-  # 确保包含指定的三个数字  
+  # Add the three known-good values
   numbers+=(942 6684 7359)
 
-  # 对数组进行排序
+  # Sort so the driver consumes them deterministically
   sorted_numbers=($(echo "${numbers[@]}" | tr ' ' '\n' | sort -n))
 
   for j in {0..99}; do
@@ -60,7 +82,7 @@ generate_and_sort_numbers() {
   
 }
 
-# 主循环，执行十次
+# Main loop: run twice to capture two batches of data
 for ((k=1; k<=2; k++)); do
   date=`date +"%m%d-%H%M"`
   sudo rm -rf out
@@ -69,11 +91,11 @@ for ((k=1; k<=2; k++)); do
   generate_and_sort_numbers
 
 
-  #   Warm Up 
+  #   Warm up the CPU so DFS settles
 
   stress-ng -q --cpu $TOTAL_LOGICAL_CORES -t 10m
 
-  #   Run
+  #   Run the actual measurement
 
   sudo ./bin/driver_kem ${samples} ${outer}
   cp -r out/ data/out-${date}

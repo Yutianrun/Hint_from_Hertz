@@ -79,7 +79,7 @@ int crypto_kem_malice_enc_test(unsigned char *c,
   // for (size_t i = 0; i < 768; i++)
   // {
   //   /* code */
-  //   temp_t[i]=temp_t[i]*900%7681;   //900为mont的逆
+  //   temp_t[i]=temp_t[i]*900%7681;   // 900 is the modular inverse for the Montgomery factor
   // }
 
 

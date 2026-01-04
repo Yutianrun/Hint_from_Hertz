@@ -167,7 +167,7 @@ int main(int argc, char *argv[])
 	// }
 
 	for (int j = 0; j < outer; j++){
-		// 根据奇偶性选择正序或倒序遍历
+		// Alternate between forward and reverse sweeps based on j's parity
         int start = 0;
         int end = num_selectors-1;
         int step = 1;

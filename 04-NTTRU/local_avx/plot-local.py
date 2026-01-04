@@ -13,7 +13,7 @@ import time
 def parse_file(fn):
     energy = []
     freq = []
-    with open(fn,encoding='latin-1') as f:  #latin-1解码方式可以将所有单字节的都解码出来，如果不考虑多字节码正确性的情况下，这种解码方式是不会解码异常的
+    with open(fn,encoding='latin-1') as f:  # latin-1 ensures every single-byte value decodes even if multi-byte sequences are malformed
         for line in f:
             try:
                 a, b = line.strip('\x00').split()
@@ -214,7 +214,7 @@ def main():
     
 
 
-    # 按照frequency_mean进行降序排序
+    # Keep for quick debugging if we need to sort frequency_mean in descending order
     # sorted_data = sorted(freq_mean_data, key=lambda x: x['frequency_mean'], reverse=True)
     # output_file = "output.txt"
     # with open(output_file, 'a') as f:
@@ -297,7 +297,7 @@ def main():
     import plotly.io as pio
 
 
-    #以下操作画出来的图片没有 "Loading [MathJax]/extensions/MathMenu.js"警告
+    # The following avoids the "Loading [MathJax]/extensions/MathMenu.js" warning when exporting figures
 
     # pio.kaleido.scope.mathjax = None    
     pio.full_figure_for_development(fig, warn=False)

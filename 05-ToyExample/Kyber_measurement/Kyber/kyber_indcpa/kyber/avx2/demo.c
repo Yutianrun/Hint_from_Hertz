@@ -41,7 +41,7 @@ int main(int argc, char *argv[]) {
     poly_invntt_tomont(&res);
     poly_reduce(&res);
 
-    printf("乘积结果res为:\n");
+    printf("Resulting product res:\n");
     for (size_t i = 0; i < 128; i++)
     {
         /* code */
