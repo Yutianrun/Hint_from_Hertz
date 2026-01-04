@@ -9,7 +9,7 @@ local/
 ├── hint_pair_search/              # Tournament search for hint pair
 │   ├── run.sh                     # Run search (default: s100, o50)
 │   └── search.py                  # Search algorithm
-├── run_near_s_and_random_100_avx.sh  # Test near-s and random pairs
+├── run_near_s_and_random_100_avx.sh  # Reproduce paper figure
 ├── driver_indcpa_avx.c            # Measurement driver
 ├── plot.py                        # Plot results
 └── Makefile
@@ -22,14 +22,20 @@ local/
 make
 
 # Run hint pair search (~12 hours)
-cd hint_pair_search
-./run.sh
+cd hint_pair_search && ./run.sh
 
-# Custom parameters
-./run.sh -s 100 -o 50
+# Reproduce paper figure: measure 100 z values (98 random + target pair)
+sudo ./run_near_s_and_random_100_avx.sh
 ```
 
-## Parameters
+## Scripts
+
+| Script | Function |
+|--------|----------|
+| `hint_pair_search/run.sh` | Full search, finds hint pair via tournament (~12h) |
+| `run_near_s_and_random_100_avx.sh` | Paper figure: 100 z values frequency comparison |
+
+## Parameters (hint_pair_search)
 
 | Param | Default | Description |
 |-------|---------|-------------|
