@@ -14,8 +14,8 @@ DFS leakage toolkit for Hertzbleed-style attacks on Kyber (CPA) and NTTRU (CCA).
 | Directory | Function |
 |-----------|----------|
 | `01-leakage-channel-data` | Confirm DFS channel on your CPU |
-| `02-Kyber-pureNTT` | Pure NTT frequency traces |
-| `03-CPA-Kyber` | CPA attack on Kyber AVX2 |
+| `02-Kyber-NTT` | NTT frequency & time measurements |
+| `03-Kyber-CPA-Uncompressed` | CPA attack on Kyber AVX2 |
 | `03-Kyber-KnownSK_*` | Key pair verification |
 | `04-NTTRU` | NTTRU CCA attack |
 | `05-ToyExample` | Minimal end-to-end demo |
@@ -27,11 +27,11 @@ DFS leakage toolkit for Hertzbleed-style attacks on Kyber (CPA) and NTTRU (CCA).
 # 1. Calibrate leakage
 cd 01-leakage-channel-data && sudo ./run-steady.sh
 
-# 2. Measure pure NTT
-cd 02-Kyber-pureNTT && make && sudo ./start_all.sh
+# 2. Measure NTT
+cd 02-Kyber-NTT/freq && make && sudo ./run.sh
 
 # 3. Run Kyber CPA attack (~12h)
-cd 03-CPA-Kyber/kyber_indcpa/local/hint_pair_search && ./run.sh
+cd 03-Kyber-CPA-Uncompressed/hint_pair_search && ./run.sh
 
 # 4. Run NTTRU attack
 cd 04-NTTRU/local_avx && sudo ./run-local_cca_nttru.sh

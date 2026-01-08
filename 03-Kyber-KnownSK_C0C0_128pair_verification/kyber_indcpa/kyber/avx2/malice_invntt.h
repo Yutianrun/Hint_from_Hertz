@@ -1,5 +1,5 @@
-#ifndef NTT_H
-#define NTT_H
+#ifndef MALICE_INVNTT_H
+#define MALICE_INVNTT_H
 
 #include <stdint.h>
 #include "params.h"
