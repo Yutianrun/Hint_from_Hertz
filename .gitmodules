@@ -1,3 +1,6 @@
 [submodule "kyber"]
 	path = kyber
 	url = https://github.com/pq-crystals/kyber.git
+[submodule "04-NTTRU/NTTRU"]
+	path = 04-NTTRU/NTTRU
+	url = https://github.com/gregorseiler/NTTRU

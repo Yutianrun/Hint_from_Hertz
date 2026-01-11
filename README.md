@@ -17,7 +17,8 @@ DFS leakage toolkit for Hertzbleed-style attacks on Kyber (CPA) and NTTRU (CCA).
 | `02-Kyber-NTT` | NTT frequency & time measurements |
 | `03-Kyber-CPA-Uncompressed` | CPA attack on Kyber AVX2 |
 | `03-Kyber-KnownSK_*` | Key pair verification |
-| `04-NTTRU` | NTTRU CCA attack |
+| `04-NTTRU` | NTTRU run-near (driver/plot) |
+| `04-NTTRU-bak` | Previous NTTRU code backup |
 | `05-ToyExample` | Minimal end-to-end demo |
 | `06-Bit_Estimation` | DDGR security-loss estimation |
 
@@ -34,7 +35,7 @@ cd 02-Kyber-NTT/freq && make && sudo ./run.sh
 cd 03-Kyber-CPA-Uncompressed/hint_pair_search && ./run.sh
 
 # 4. Run NTTRU attack
-cd 04-NTTRU/local_avx && sudo ./run-local_cca_nttru.sh
+cd 04-NTTRU && make && ./run_near_f_and_random_100_avx.sh
 ```
 
 All scripts require `sudo` for MSR access. Use `--help` for options.
